@@ -46,7 +46,6 @@ final class GetServiceCategoriesRequest extends BaseRenovatioRequest
     {
         $payload = $this->getVisibilityPayload();
 
-        // Согласно документации, параметра show_all нет у этого метода, так что можно его убрать
         unset($payload['show_all']);
 
         if ($this->categoryId !== null) {
