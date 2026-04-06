@@ -1,0 +1,40 @@
+{
+    "name": "onepix/renovatio-sdk",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Onepix\\RenovatioSdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Onepix",
+            "homepage": "https://onepix.net",
+            "role": "Company"
+        },
+        {
+            "name": "0zd0",
+            "role": "Lead Developer",
+            "homepage": "https://github.com/0zd0"
+        }
+    ],
+    "require": {
+        "php": "^8.4",
+        "saloonphp/saloon": "^v4.0.0",
+        "cuyz/valinor": "^2.4.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.6.12",
+        "pestphp/pest": "^v4.4.5",
+        "phpstan/phpstan": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.94"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "platform": {
+            "php": "8.4"
+        }
+    }
+}
