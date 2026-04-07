@@ -9,6 +9,8 @@ final class APIMapper
 {
     private static ?TreeMapper $mapper = null;
 
+    private static ?\CuyZ\Valinor\Normalizer\Normalizer $normalizer = null;
+
     public static function get(): TreeMapper
     {
         if (self::$mapper === null) {
@@ -19,5 +21,14 @@ final class APIMapper
         }
 
         return self::$mapper;
+    }
+
+    public static function getNormalizer(): \CuyZ\Valinor\Normalizer\Normalizer
+    {
+        if (self::$normalizer === null) {
+            self::$normalizer = (new \CuyZ\Valinor\NormalizerBuilder())->normalizer(\CuyZ\Valinor\Normalizer\Format::array());
+        }
+
+        return self::$normalizer;
     }
 }
