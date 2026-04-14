@@ -6,6 +6,11 @@
             "Onepix\\RenovatioSdk\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Onepix",
@@ -27,7 +32,8 @@
         "mockery/mockery": "^1.6.12",
         "pestphp/pest": "^v4.4.5",
         "phpstan/phpstan": "^2.1",
-        "friendsofphp/php-cs-fixer": "^3.94"
+        "friendsofphp/php-cs-fixer": "^3.94",
+        "vlucas/phpdotenv": "^v5.6.3"
     },
     "config": {
         "allow-plugins": {

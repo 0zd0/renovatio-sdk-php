@@ -10,3 +10,4 @@ composer.phar
 !.idea/inspectionProfiles
 
 .php-cs-fixer.cache
+.env
