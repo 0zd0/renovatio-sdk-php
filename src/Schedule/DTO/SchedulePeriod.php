@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace Onepix\RenovatioSdk\Schedule\DTO;
 
+use Onepix\RenovatioSdk\Shared\DTO\OnlyDate;
+use Onepix\RenovatioSdk\Shared\DTO\OnlyDateTime;
+
 readonly class SchedulePeriod
 {
     public function __construct(
-        public string $date,
-        public string $timeStart,
-        public string $timeEnd,
-        public ?int $type = null,
-        public ?string $clinicId = null,
-        public ?string $userId = null,
-        public ?string $categoryId = null,
-        public ?string $room = null,
-        public ?bool $withoutCrossing = null,
-        public ?bool $disableInSalary = null,
-        public ?string $cancellationReasonId = null,
+        public OnlyDate     $date,
+        public OnlyDateTime $timeStart,
+        public OnlyDateTime $timeEnd,
+        public int          $type,
+        public int          $clinicId,
+        public int          $userId,
+        public ?int         $categoryId = null,
+        public ?string      $room = null,
+        public bool         $withoutCrossing,
+        public bool         $disableInSalary,
+        public ?int         $cancellationReasonId = null,
     ) {}
 }

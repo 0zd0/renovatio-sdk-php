@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Onepix\RenovatioSdk\Schedule\Requests;
 
 use DateTimeInterface;
-use Onepix\RenovatioSdk\Schedule\DTO\ScheduleSlot;
+use Onepix\RenovatioSdk\Schedule\DTO\DoctorScheduleSlot;
 use Onepix\RenovatioSdk\Shared\Requests\BaseRenovatioRequest;
 use Onepix\RenovatioSdk\Shared\Requests\Traits\HasVisibilityFilters;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 
-final class GetScheduleRequest extends BaseRenovatioRequest
+final class GetScheduleRequest extends BaseRenovatioRequest implements HasBody
 {
     use HasVisibilityFilters;
 
@@ -32,72 +33,84 @@ final class GetScheduleRequest extends BaseRenovatioRequest
     public function setClinicId(?string $clinicId): static
     {
         $this->clinicId = $clinicId;
+
         return $this;
     }
 
     public function setUserId(array|string|null $userId): static
     {
         $this->userId = $userId;
+
         return $this;
     }
 
     public function setServiceId(?string $serviceId): static
     {
         $this->serviceId = $serviceId;
+
         return $this;
     }
 
     public function setTimeStart(DateTimeInterface|string|null $timeStart): static
     {
         $this->timeStart = $timeStart;
+
         return $this;
     }
 
     public function setTimeEnd(DateTimeInterface|string|null $timeEnd): static
     {
         $this->timeEnd = $timeEnd;
+
         return $this;
     }
 
     public function setRoom(?string $room): static
     {
         $this->room = $room;
+
         return $this;
     }
 
     public function setStep(int|string|null $step): static
     {
         $this->step = $step;
+
         return $this;
     }
 
     public function setUseDoctorAvgTime(bool $useDoctorAvgTime = true): static
     {
         $this->useDoctorAvgTime = $useDoctorAvgTime;
+
         return $this;
     }
 
     public function setAllClinics(bool $allClinics = true): static
     {
         $this->allClinics = $allClinics;
+
         return $this;
     }
 
     public function setShowBusy(bool $showBusy = true): static
     {
         $this->showBusy = $showBusy;
+
         return $this;
     }
 
     public function setShowPast(bool $showPast = true): static
     {
         $this->showPast = $showPast;
+
         return $this;
     }
 
     public function setMode(?string $mode): static
     {
         $this->mode = $mode;
+
         return $this;
     }
 
@@ -163,8 +176,22 @@ final class GetScheduleRequest extends BaseRenovatioRequest
         return $payload;
     }
 
+    protected function normalizeResponseData(array $data): array
+    {
+        $normalized = [];
+
+        foreach ($data as $id => $slots) {
+            $normalized[] = [
+                'id' => $id,
+                'slots' => $slots,
+            ];
+        }
+
+        return $normalized;
+    }
+
     protected function getDtoClass(): string
     {
-        return 'array<' . ScheduleSlot::class . '>';
+        return 'array<' . DoctorScheduleSlot::class . '>';
     }
 }

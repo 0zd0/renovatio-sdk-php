@@ -7,9 +7,10 @@ namespace Onepix\RenovatioSdk\Dictionaries\Requests;
 use Onepix\RenovatioSdk\Dictionaries\DTO\User;
 use Onepix\RenovatioSdk\Shared\Requests\BaseRenovatioRequest;
 use Onepix\RenovatioSdk\Shared\Requests\Traits\HasVisibilityFilters;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 
-final class GetUsersRequest extends BaseRenovatioRequest
+final class GetUsersRequest extends BaseRenovatioRequest implements HasBody
 {
     use HasVisibilityFilters;
 
@@ -29,60 +30,70 @@ final class GetUsersRequest extends BaseRenovatioRequest
     public function setUserId(array|string|null $userId): static
     {
         $this->userId = $userId;
+
         return $this;
     }
 
     public function setClinicId(?string $clinicId): static
     {
         $this->clinicId = $clinicId;
+
         return $this;
     }
 
     public function setProfessionId(?string $professionId): static
     {
         $this->professionId = $professionId;
+
         return $this;
     }
 
     public function setRole(?string $role): static
     {
         $this->role = $role;
+
         return $this;
     }
 
     public function setCarNumber(?string $carNumber): static
     {
         $this->carNumber = $carNumber;
+
         return $this;
     }
 
     public function setServiceId(array|string|null $serviceId): static
     {
         $this->serviceId = $serviceId;
+
         return $this;
     }
 
     public function setServiceMode(?string $serviceMode): static
     {
         $this->serviceMode = $serviceMode;
+
         return $this;
     }
 
     public function setWithServices(?bool $withServices = true): static
     {
         $this->withServices = $withServices;
+
         return $this;
     }
 
     public function setIsOutside(?bool $isOutside = true): static
     {
         $this->isOutside = $isOutside;
+
         return $this;
     }
 
     public function setIsTelemedicine(?bool $isTelemedicine = true): static
     {
         $this->isTelemedicine = $isTelemedicine;
+
         return $this;
     }
 

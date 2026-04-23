@@ -16,6 +16,11 @@ abstract class BaseRenovatioRequest extends Request
 
     abstract protected function getDtoClass(): string;
 
+    protected function normalizeResponseData(array $data): array
+    {
+        return $data;
+    }
+
     /**
      * @throws RenovatioApiException
      * @throws MappingError|JsonException
@@ -31,8 +36,43 @@ abstract class BaseRenovatioRequest extends Request
             );
         }
 
-        $payload = $data['data'] ?? [];
+        $payload = $this->normalizeResponseData($data['data'] ?? []);
 
-        return APIMapper::get()->map($this->getDtoClass(), $payload);
+        try {
+            return APIMapper::get()->map(
+                $this->getDtoClass(),
+                $payload,
+            );
+        } catch (MappingError $exception) {
+            throw new RenovatioApiException(
+                $this->formatMappingErrors($exception),
+            );
+        }
+    }
+
+    private function formatMappingErrors(MappingError $exception, int $limit = 5): string
+    {
+        $errors = [];
+        $count = 0;
+
+        foreach ($exception->messages() as $message) {
+            $path = $message->path();
+            $key = $path === '' ? 'root' : $path;
+
+            $errors[$key] = (string) $message;
+            $count++;
+
+            if ($count >= $limit) {
+                break;
+            }
+        }
+
+        return json_encode(
+            [
+                'summary' => sprintf('DTO Mapping failed. Showing first %d errors.', $limit),
+                'errors' => $errors,
+            ],
+            JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR,
+        );
     }
 }

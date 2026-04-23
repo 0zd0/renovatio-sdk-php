@@ -7,9 +7,10 @@ namespace Onepix\RenovatioSdk\Dictionaries\Requests;
 use Onepix\RenovatioSdk\Dictionaries\DTO\ServicePriceType;
 use Onepix\RenovatioSdk\Shared\Requests\BaseRenovatioRequest;
 use Onepix\RenovatioSdk\Shared\Requests\Traits\HasVisibilityFilters;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 
-final class GetServicePriceTypesRequest extends BaseRenovatioRequest
+final class GetServicePriceTypesRequest extends BaseRenovatioRequest implements HasBody
 {
     use HasVisibilityFilters;
 

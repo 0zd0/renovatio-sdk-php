@@ -7,9 +7,10 @@ namespace Onepix\RenovatioSdk\Dictionaries\Requests;
 use Onepix\RenovatioSdk\Dictionaries\DTO\Service;
 use Onepix\RenovatioSdk\Shared\Requests\BaseRenovatioRequest;
 use Onepix\RenovatioSdk\Shared\Requests\Traits\HasVisibilityFilters;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 
-final class GetServicesRequest extends BaseRenovatioRequest
+final class GetServicesRequest extends BaseRenovatioRequest implements HasBody
 {
     use HasVisibilityFilters;
 
@@ -29,60 +30,70 @@ final class GetServicesRequest extends BaseRenovatioRequest
     public function setServiceId(array|string|null $serviceId): static
     {
         $this->serviceId = $serviceId;
+
         return $this;
     }
 
     public function setCategoryId(array|string|null $categoryId): static
     {
         $this->categoryId = $categoryId;
+
         return $this;
     }
 
     public function setShowChildren(bool $showChildren = true): static
     {
         $this->showChildren = $showChildren;
+
         return $this;
     }
 
     public function setProfessionId(?string $professionId): static
     {
         $this->professionId = $professionId;
+
         return $this;
     }
 
     public function setClinicId(?string $clinicId): static
     {
         $this->clinicId = $clinicId;
+
         return $this;
     }
 
     public function setTypeId(?string $typeId): static
     {
         $this->typeId = $typeId;
+
         return $this;
     }
 
     public function setUserId(array|string|null $userId): static
     {
         $this->userId = $userId;
+
         return $this;
     }
 
     public function setUserMode(?string $userMode): static
     {
         $this->userMode = $userMode;
+
         return $this;
     }
 
     public function setTerm(?string $term): static
     {
         $this->term = $term;
+
         return $this;
     }
 
     public function setLimit(?int $limit): static
     {
         $this->limit = $limit;
+
         return $this;
     }
 

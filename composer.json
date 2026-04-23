@@ -42,5 +42,8 @@
         "platform": {
             "php": "8.4"
         }
+    },
+    "scripts": {
+        "cs:fix": "php-cs-fixer fix"
     }
 }

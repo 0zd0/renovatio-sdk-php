@@ -8,9 +8,10 @@ use DateTimeInterface;
 use Onepix\RenovatioSdk\Schedule\DTO\AppointmentService;
 use Onepix\RenovatioSdk\Shared\Requests\BaseRenovatioRequest;
 use Onepix\RenovatioSdk\Shared\Support\APIMapper;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 
-final class CreateAppointmentRequest extends BaseRenovatioRequest
+final class CreateAppointmentRequest extends BaseRenovatioRequest implements HasBody
 {
     protected Method $method = Method::POST;
 
@@ -52,132 +53,154 @@ final class CreateAppointmentRequest extends BaseRenovatioRequest
     public function setFirstName(?string $firstName): static
     {
         $this->firstName = $firstName;
+
         return $this;
     }
 
     public function setLastName(?string $lastName): static
     {
         $this->lastName = $lastName;
+
         return $this;
     }
 
     public function setThirdName(?string $thirdName): static
     {
         $this->thirdName = $thirdName;
+
         return $this;
     }
 
     public function setBirthDate(DateTimeInterface|string|null $birthDate): static
     {
         $this->birthDate = $birthDate;
+
         return $this;
     }
 
     public function setMobile(?string $mobile): static
     {
         $this->mobile = $mobile;
+
         return $this;
     }
 
     public function setGender(?int $gender): static
     {
         $this->gender = $gender;
+
         return $this;
     }
 
     public function setEmail(?string $email): static
     {
         $this->email = $email;
+
         return $this;
     }
 
     public function setPatientId(?string $patientId): static
     {
         $this->patientId = $patientId;
+
         return $this;
     }
 
     public function setRoom(?string $room): static
     {
         $this->room = $room;
+
         return $this;
     }
 
     public function setChannel(?string $channel): static
     {
         $this->channel = $channel;
+
         return $this;
     }
 
     public function setSource(?string $source): static
     {
         $this->source = $source;
+
         return $this;
     }
 
     public function setType(?string $type): static
     {
         $this->type = $type;
+
         return $this;
     }
 
     public function setComment(?string $comment): static
     {
         $this->comment = $comment;
+
         return $this;
     }
 
     public function setIsOutside(bool $isOutside = true): static
     {
         $this->isOutside = $isOutside;
+
         return $this;
     }
 
     public function setIsOutsideAddress(?string $isOutsideAddress): static
     {
         $this->isOutsideAddress = $isOutsideAddress;
+
         return $this;
     }
 
     public function setIsTelemedicine(bool $isTelemedicine = true): static
     {
         $this->isTelemedicine = $isTelemedicine;
+
         return $this;
     }
 
     public function setNoSms(bool $noSms = true): static
     {
         $this->noSms = $noSms;
+
         return $this;
     }
 
     public function setNoEmail(bool $noEmail = true): static
     {
         $this->noEmail = $noEmail;
+
         return $this;
     }
 
     public function setIsHandled(bool $isHandled = true): static
     {
         $this->isHandled = $isHandled;
+
         return $this;
     }
 
     public function setMovedFrom(?string $movedFrom): static
     {
         $this->movedFrom = $movedFrom;
+
         return $this;
     }
 
     public function setCheckIntersection(bool $checkIntersection = true): static
     {
         $this->checkIntersection = $checkIntersection;
+
         return $this;
     }
 
     public function setCheckAge(bool $checkAge = true): static
     {
         $this->checkAge = $checkAge;
+
         return $this;
     }
 
@@ -187,24 +210,28 @@ final class CreateAppointmentRequest extends BaseRenovatioRequest
     public function setServices(?array $services): static
     {
         $this->services = $services;
+
         return $this;
     }
 
     public function setUtmSource(?string $utmSource): static
     {
         $this->utmSource = $utmSource;
+
         return $this;
     }
 
     public function setUtmMedium(?string $utmMedium): static
     {
         $this->utmMedium = $utmMedium;
+
         return $this;
     }
 
     public function setUtmCampaign(?string $utmCampaign): static
     {
         $this->utmCampaign = $utmCampaign;
+
         return $this;
     }
 
@@ -312,8 +339,8 @@ final class CreateAppointmentRequest extends BaseRenovatioRequest
 
         if ($this->services !== null) {
             $servicesData = APIMapper::getNormalizer()->normalize($this->services);
-            $servicesData = array_map(static fn (array $service) => array_filter($service, static fn ($val) => $val !== null), (array) $servicesData);
-            
+            $servicesData = array_map(static fn(array $service) => array_filter($service, static fn($val) => $val !== null), (array) $servicesData);
+
             $payload['services'] = json_encode($servicesData, JSON_THROW_ON_ERROR);
         }
 

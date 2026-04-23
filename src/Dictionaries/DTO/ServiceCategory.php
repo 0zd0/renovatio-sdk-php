@@ -6,11 +6,18 @@ namespace Onepix\RenovatioSdk\Dictionaries\DTO;
 
 readonly class ServiceCategory
 {
+    /**
+     * @param int $id
+     * @param string $title
+     * @param bool $isDeleted
+     * @param int $servicesCount
+     * @param ServiceCategory[] $children
+     */
     public function __construct(
-        public string $id,
+        public int $id,
         public string $title,
         public bool $isDeleted,
-        public ?int $servicesCount = null,
-        public ?array $children = null,
+        public array $children,
+        public int $servicesCount,
     ) {}
 }

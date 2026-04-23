@@ -7,9 +7,10 @@ namespace Onepix\RenovatioSdk\Dictionaries\Requests;
 use Onepix\RenovatioSdk\Dictionaries\DTO\ServiceCategory;
 use Onepix\RenovatioSdk\Shared\Requests\BaseRenovatioRequest;
 use Onepix\RenovatioSdk\Shared\Requests\Traits\HasVisibilityFilters;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 
-final class GetServiceCategoriesRequest extends BaseRenovatioRequest
+final class GetServiceCategoriesRequest extends BaseRenovatioRequest implements HasBody
 {
     use HasVisibilityFilters;
 
@@ -22,18 +23,21 @@ final class GetServiceCategoriesRequest extends BaseRenovatioRequest
     public function setCategoryId(array|string|null $categoryId): static
     {
         $this->categoryId = $categoryId;
+
         return $this;
     }
 
     public function setIncludeSelf(bool $includeSelf = true): static
     {
         $this->includeSelf = $includeSelf;
+
         return $this;
     }
 
     public function setClinicId(?string $clinicId): static
     {
         $this->clinicId = $clinicId;
+
         return $this;
     }
 

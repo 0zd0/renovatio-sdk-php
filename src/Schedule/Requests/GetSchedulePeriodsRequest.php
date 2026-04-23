@@ -7,9 +7,10 @@ namespace Onepix\RenovatioSdk\Schedule\Requests;
 use DateTimeInterface;
 use Onepix\RenovatioSdk\Schedule\DTO\SchedulePeriod;
 use Onepix\RenovatioSdk\Shared\Requests\BaseRenovatioRequest;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 
-final class GetSchedulePeriodsRequest extends BaseRenovatioRequest
+final class GetSchedulePeriodsRequest extends BaseRenovatioRequest implements HasBody
 {
     protected Method $method = Method::POST;
 
@@ -20,37 +21,42 @@ final class GetSchedulePeriodsRequest extends BaseRenovatioRequest
     private ?int $type = null;
 
     public function __construct(
-        private DateTimeInterface|string $timeStart,
-        private DateTimeInterface|string $timeEnd,
+        private readonly DateTimeInterface|string $timeStart,
+        private readonly DateTimeInterface|string $timeEnd,
     ) {}
 
     public function setClinicId(array|string|null $clinicId): static
     {
         $this->clinicId = $clinicId;
+
         return $this;
     }
 
     public function setRoleId(array|string|null $roleId): static
     {
         $this->roleId = $roleId;
+
         return $this;
     }
 
     public function setCategoryId(array|string|null $categoryId): static
     {
         $this->categoryId = $categoryId;
+
         return $this;
     }
 
     public function setUserId(array|string|null $userId): static
     {
         $this->userId = $userId;
+
         return $this;
     }
 
     public function setType(?int $type): static
     {
         $this->type = $type;
+
         return $this;
     }
 

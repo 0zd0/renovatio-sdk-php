@@ -1,12 +1,16 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Onepix\RenovatioSdk\Dictionaries\DTO;
 
 readonly class Clinic
 {
+    /**
+     * @param list<string>|null $images
+     */
     public function __construct(
-        public string $id,
+        public int $id,
         public string $title,
         public bool $isDeleted,
         public ?string $color = null,

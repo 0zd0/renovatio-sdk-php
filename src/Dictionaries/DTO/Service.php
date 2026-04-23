@@ -6,37 +6,70 @@ namespace Onepix\RenovatioSdk\Dictionaries\DTO;
 
 readonly class Service
 {
+    /**
+     * @param int $serviceId
+     * @param string $title
+     * @param bool $isDeleted
+     * @param string $code
+     * @param string $subCode
+     * @param int $categoryId
+     * @param string $categoryTitle
+     * @param string $categoryPath
+     * @param int $professionId
+     * @param string $professionTitle
+     * @param float|null $price
+     * @param float|null $originalPrice
+     * @param int|null $duration
+     * @param int|null $durationDeferred
+     * @param string $lab
+     * @param string|int|null $tax
+     * @param string $shortDesc
+     * @param string $fullDesc
+     * @param string $preparation
+     * @param string $reasons
+     * @param string $restrictions
+     * @param string|null $alias
+     * @param string[] $types
+     * @param string $typeTitles
+     * @param string[] $relatedServices
+     * @param string[] $relatedServicesDefault
+     * @param array<int, float|null> $priceTypes
+     * @param string|null $agentId
+     * @param bool $isTelemedicine
+     * @param bool $isOutside
+     * @param bool $isHidden
+     */
     public function __construct(
-        public string $serviceId,
+        public int $serviceId,
         public string $title,
         public bool $isDeleted,
-        public ?string $code = null,
-        public ?string $subCode = null,
-        public ?string $categoryId = null,
-        public ?string $categoryTitle = null,
-        public ?string $categoryPath = null,
-        public ?string $professionId = null,
-        public ?string $professionTitle = null,
-        public string|int|float|null $price = null,
-        public string|int|float|null $originalPrice = null,
-        public string|int|null $duration = null,
-        public string|int|null $durationDeferred = null,
-        public ?string $lab = null,
-        public string|int|null $tax = null,
-        public ?string $shortDesc = null,
-        public ?string $fullDesc = null,
-        public ?string $preparation = null,
-        public ?string $reasons = null,
-        public ?string $restrictions = null,
-        public ?string $alias = null,
-        public ?array $types = null,
-        public ?string $typeTitles = null,
-        public ?array $relatedServices = null,
-        public ?array $relatedServicesDefault = null,
-        public ?array $priceTypes = null,
-        public ?string $agentId = null,
-        public ?bool $isTelemedicine = null,
-        public ?bool $isOutside = null,
-        public ?bool $isHidden = null,
+        public string $code,
+        public string $subCode,
+        public int $categoryId,
+        public string $categoryTitle,
+        public string $categoryPath,
+        public int $professionId,
+        public string $professionTitle,
+        public int|float|null $price,
+        public int|float|null $originalPrice,
+        public ?int $duration,
+        public ?int $durationDeferred,
+        public string $lab,
+        public string|int|null $tax,
+        public string $shortDesc,
+        public string $fullDesc,
+        public string $preparation,
+        public string $reasons,
+        public string $restrictions,
+        public ?string $alias,
+        public array $types,
+        public string $typeTitles,
+        public array $relatedServices,
+        public array $relatedServicesDefault,
+        public array $priceTypes,
+        public ?string $agentId,
+        public bool $isTelemedicine,
+        public bool $isOutside,
+        public bool $isHidden,
     ) {}
 }

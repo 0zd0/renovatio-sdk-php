@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Onepix\RenovatioSdk;
@@ -13,12 +14,13 @@ final class Renovatio extends Connector implements HasBody
 
     public function __construct(
         private readonly string $apiKey,
+        private readonly string $domain = 'app.rnova.org',
         private readonly ?string $proxy = null,
     ) {}
 
     public function resolveBaseUrl(): string
     {
-        return 'https://app.rnova.org/api/public';
+        return "https://$this->domain/api/public";
     }
 
     protected function defaultBody(): array

@@ -11,18 +11,21 @@ trait HasVisibilityFilters
     public function setShowAll(bool $showAll = true): static
     {
         $this->showAll = $showAll;
+
         return $this;
     }
 
     public function setShowDeleted(bool $showDeleted = true): static
     {
         $this->showDeleted = $showDeleted;
+
         return $this;
     }
 
     public function setSource(?string $source): static
     {
         $this->source = $source;
+
         return $this;
     }
 

@@ -7,7 +7,7 @@ namespace Onepix\RenovatioSdk\Dictionaries\DTO;
 readonly class ServiceType
 {
     public function __construct(
-        public string $id,
+        public int $id,
         public string $title,
         public bool $isDeleted,
     ) {}
