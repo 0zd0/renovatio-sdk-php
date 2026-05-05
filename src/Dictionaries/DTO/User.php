@@ -44,7 +44,7 @@ final readonly class User
      * @param int|null $patientAgeTo
      * @param bool $isOutside
      * @param bool $isTelemedicine
-     * @param string|null $dateWorkFrom
+     * @param ?OnlyDate $dateWorkFrom
      * @param string|null $workPeriod
      * @param string|null $workDegree
      * @param string|null $workRank
@@ -61,9 +61,6 @@ final readonly class User
         public int       $id,
         public string    $name,
         public bool      $isDeleted,
-        public ?string   $avatar = null,
-        public ?string   $avatarSmall = null,
-        public ?OnlyDate $birthDate = null,
         public Gender    $gender,
         public array     $role,
         public string    $roleTitles,
@@ -82,6 +79,9 @@ final readonly class User
         public string $externalLink,
         public string $education,
         public string $educationCourses,
+        public ?string   $avatar = null,
+        public ?string   $avatarSmall = null,
+        public ?OnlyDate $birthDate = null,
         public ?string $documentDate = null,
         public ?string $phone = null,
         public ?string $email = null,
@@ -97,7 +97,7 @@ final readonly class User
         public ?int $defaultClinic = null,
         public ?int $patientAgeFrom = null,
         public ?int $patientAgeTo = null,
-        public ?string $dateWorkFrom = null,
+        public ?OnlyDate $dateWorkFrom = null,
         public ?string $workPeriod = null,
         public ?string $workDegree = null,
         public ?string $workRank = null,

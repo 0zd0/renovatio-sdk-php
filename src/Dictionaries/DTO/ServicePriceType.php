@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Onepix\RenovatioSdk\Dictionaries\DTO;
 
-readonly class ServicePriceType
+final readonly class ServicePriceType
 {
     public function __construct(
         public int $id,

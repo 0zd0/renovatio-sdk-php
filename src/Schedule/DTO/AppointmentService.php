@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Onepix\RenovatioSdk\Schedule\DTO;
 
-readonly class AppointmentService
+final readonly class AppointmentService
 {
     public function __construct(
         public ?string $serviceId = null,

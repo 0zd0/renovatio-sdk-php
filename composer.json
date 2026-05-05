@@ -1,6 +1,7 @@
 {
     "name": "onepix/renovatio-sdk",
     "license": "MIT",
+    "type": "library",
     "autoload": {
         "psr-4": {
             "Onepix\\RenovatioSdk\\": "src/"

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Onepix\RenovatioSdk\Dictionaries\DTO;
 
-readonly class ServiceCategory
+final readonly class ServiceCategory
 {
     /**
      * @param int $id

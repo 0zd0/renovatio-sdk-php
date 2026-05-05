@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Onepix\RenovatioSdk\Dictionaries\DTO;
 
-readonly class Clinic
+final readonly class Clinic
 {
     /**
      * @param list<string>|null $images

@@ -6,7 +6,7 @@ namespace Onepix\RenovatioSdk\Schedule\DTO;
 
 use Onepix\RenovatioSdk\Shared\DTO\OnlyDate;
 
-readonly class ScheduleSlot
+final readonly class ScheduleSlot
 {
     public function __construct(
         public int $scheduleId,

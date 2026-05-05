@@ -7,7 +7,7 @@ namespace Onepix\RenovatioSdk\Schedule\DTO;
 use Onepix\RenovatioSdk\Shared\DTO\OnlyDate;
 use Onepix\RenovatioSdk\Shared\DTO\OnlyDateTime;
 
-readonly class SchedulePeriod
+final readonly class SchedulePeriod
 {
     public function __construct(
         public OnlyDate     $date,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Onepix\RenovatioSdk\Dictionaries\DTO;
 
-readonly class Profession
+final readonly class Profession
 {
     public function __construct(
         public int $id,
