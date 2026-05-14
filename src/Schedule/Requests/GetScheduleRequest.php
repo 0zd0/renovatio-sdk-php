@@ -30,21 +30,21 @@ final class GetScheduleRequest extends BaseRenovatioRequest implements HasBody
     private ?bool $showPast = null;
     private ?string $mode = null;
 
-    public function setClinicId(?string $clinicId): static
+    public function setClinicId(string|int|null $clinicId): static
     {
         $this->clinicId = $clinicId;
 
         return $this;
     }
 
-    public function setUserId(array|string|null $userId): static
+    public function setUserId(array|string|int|null $userId): static
     {
         $this->userId = $userId;
 
         return $this;
     }
 
-    public function setServiceId(?string $serviceId): static
+    public function setServiceId(string|int|null $serviceId): static
     {
         $this->serviceId = $serviceId;
 
