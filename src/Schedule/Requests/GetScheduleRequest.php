@@ -17,9 +17,9 @@ final class GetScheduleRequest extends BaseRenovatioRequest implements HasBody
 
     protected Method $method = Method::POST;
 
-    private ?string $clinicId = null;
-    private array|string|null $userId = null;
-    private ?string $serviceId = null;
+    private string|int|null $clinicId = null;
+    private array|string|int|null $userId = null;
+    private string|int|null $serviceId = null;
     private DateTimeInterface|string|null $timeStart = null;
     private DateTimeInterface|string|null $timeEnd = null;
     private ?string $room = null;

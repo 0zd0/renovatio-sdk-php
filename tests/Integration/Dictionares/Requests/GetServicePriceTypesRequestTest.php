@@ -10,7 +10,6 @@ it('the correctness of DTO in production', function () {
 
     expect($response->status())->toBe(200);
 
-    $json = $response->json();
     $dto = $response->dto();
 
     expect($dto)
