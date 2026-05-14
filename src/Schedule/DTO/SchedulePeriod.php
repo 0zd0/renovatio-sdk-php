@@ -12,7 +12,7 @@ final readonly class SchedulePeriod
 {
     public function __construct(
         #[Context([
-            DateTimeNormalizer::FORMAT_KEY => 'd.m.Y',
+            DateTimeNormalizer::FORMAT_KEY => '!d.m.Y',
         ])]
         public DateTimeImmutable     $date,
         #[Context([

@@ -82,7 +82,7 @@ final readonly class User
         public ?string   $avatar = null,
         public ?string   $avatarSmall = null,
         #[Context([
-            DateTimeNormalizer::FORMAT_KEY => 'd.m.Y',
+            DateTimeNormalizer::FORMAT_KEY => '!d.m.Y',
         ])]
         public ?DateTimeImmutable $birthDate = null,
         public ?string $documentDate = null,
@@ -101,7 +101,7 @@ final readonly class User
         public ?int $patientAgeFrom = null,
         public ?int $patientAgeTo = null,
         #[Context([
-            DateTimeNormalizer::FORMAT_KEY => 'd.m.Y',
+            DateTimeNormalizer::FORMAT_KEY => '!d.m.Y',
         ])]
         public ?DateTimeImmutable $dateWorkFrom = null,
         public ?string $workPeriod = null,
