@@ -32,6 +32,6 @@ final class GetServiceTypesRequest extends BaseRenovatioRequest implements HasBo
 
     protected function getDtoClass(): string
     {
-        return 'array<' . ServiceType::class . '>';
+        return ServiceType::class . '[]';
     }
 }

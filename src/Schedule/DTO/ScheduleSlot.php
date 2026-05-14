@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Onepix\RenovatioSdk\Schedule\DTO;
 
-use Onepix\RenovatioSdk\Shared\DTO\OnlyDate;
+use DateTimeImmutable;
+use Symfony\Component\Serializer\Attribute\Context;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 final readonly class ScheduleSlot
 {
@@ -12,22 +14,31 @@ final readonly class ScheduleSlot
         public int $scheduleId,
         public int $userId,
         public string $user,
-        public ?string $profession = null,
         public int $clinicId,
-        public ?string $clinicColor = null,
-        public OnlyDate $date,
-        public string $timeStart,
+        #[Context([
+            DateTimeNormalizer::FORMAT_KEY => 'd.m.Y',
+        ])]
+        public DateTimeImmutable $date,
+        #[Context([
+            DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s',
+        ])]
+        public DateTimeImmutable $timeStart,
         public string $timeStartShort,
-        public string $timeEnd,
+        #[Context([
+            DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s',
+        ])]
+        public DateTimeImmutable $timeEnd,
         public string $timeEndShort,
         public string $time,
         public int $categoryId,
         public string $category,
-        public ?int $color = null,
         public string $customColor,
-        public ?string $room = null,
         public bool $isBusy,
         public bool $isPast,
+        public ?string $room = null,
+        public ?string $clinicColor = null,
+        public ?int $color = null,
+        public ?string $profession = null,
         public ?int $equipmentId = null,
     ) {}
 }

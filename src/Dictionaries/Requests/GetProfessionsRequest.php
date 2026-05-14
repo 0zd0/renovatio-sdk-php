@@ -41,6 +41,6 @@ final class GetProfessionsRequest extends BaseRenovatioRequest implements HasBod
 
     protected function getDtoClass(): string
     {
-        return 'array<' . Profession::class . '>';
+        return Profession::class . '[]';
     }
 }

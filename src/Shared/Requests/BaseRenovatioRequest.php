@@ -2,13 +2,16 @@
 
 namespace Onepix\RenovatioSdk\Shared\Requests;
 
-use CuyZ\Valinor\Mapper\MappingError;
 use JsonException;
 use Onepix\RenovatioSdk\Shared\Exceptions\RenovatioApiException;
 use Onepix\RenovatioSdk\Shared\Support\APIMapper;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\Traits\Body\HasFormBody;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Exception\PartialDenormalizationException;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 abstract class BaseRenovatioRequest extends Request
 {
@@ -23,11 +26,12 @@ abstract class BaseRenovatioRequest extends Request
 
     /**
      * @throws RenovatioApiException
-     * @throws MappingError|JsonException
+     * @throws JsonException
      */
     public function createDtoFromResponse(Response $response): mixed
     {
         $data = $response->json();
+        $timezone = $response->getConnector()->getTimezone();
 
         if (isset($data['error']) && $data['error'] === 1) {
             throw new RenovatioApiException(
@@ -39,27 +43,36 @@ abstract class BaseRenovatioRequest extends Request
         $payload = $this->normalizeResponseData($data['data'] ?? []);
 
         try {
-            return APIMapper::get()->map(
-                $this->getDtoClass(),
+            return APIMapper::getSerializer()->denormalize(
                 $payload,
+                $this->getDtoClass(),
+                null,
+                [
+                    DenormalizerInterface::COLLECT_DENORMALIZATION_ERRORS => true,
+                    DateTimeNormalizer::FORCE_TIMEZONE_KEY => true,
+                    DateTimeNormalizer::TIMEZONE_KEY => $timezone,
+                ],
             );
-        } catch (MappingError $exception) {
+        } catch (PartialDenormalizationException $exception) {
             throw new RenovatioApiException(
                 $this->formatMappingErrors($exception),
+            );
+        } catch (ExceptionInterface $exception) {
+            throw new RenovatioApiException(
+                sprintf('DTO Mapping failed: %s', $exception->getMessage()),
             );
         }
     }
 
-    private function formatMappingErrors(MappingError $exception, int $limit = 5): string
+    private function formatMappingErrors(PartialDenormalizationException $exception, int $limit = 5): string
     {
         $errors = [];
         $count = 0;
 
-        foreach ($exception->messages() as $message) {
-            $path = $message->path();
-            $key = $path === '' ? 'root' : $path;
+        foreach ($exception->getErrors() as $error) {
+            $path = $error->getPath() ?? 'root';
 
-            $errors[$key] = (string) $message;
+            $errors[$path] = $error->getMessage();
             $count++;
 
             if ($count >= $limit) {

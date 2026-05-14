@@ -361,6 +361,6 @@ final class CreateAppointmentRequest extends BaseRenovatioRequest implements Has
 
     protected function getDtoClass(): string
     {
-        return 'string';
+        return '';
     }
 }

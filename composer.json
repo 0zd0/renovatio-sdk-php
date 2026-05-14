@@ -27,7 +27,7 @@
     "require": {
         "php": "^8.4",
         "saloonphp/saloon": "^v4.0.0",
-        "cuyz/valinor": "^2.4.0"
+        "symfony/serializer-pack": "^1.4"
     },
     "require-dev": {
         "mockery/mockery": "^1.6.12",

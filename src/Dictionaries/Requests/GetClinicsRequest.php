@@ -26,6 +26,6 @@ final class GetClinicsRequest extends BaseRenovatioRequest implements HasBody
 
     protected function getDtoClass(): string
     {
-        return 'array<' . Clinic::class . '>';
+        return Clinic::class . '[]';
     }
 }

@@ -97,6 +97,6 @@ final class GetSchedulePeriodsRequest extends BaseRenovatioRequest implements Ha
 
     protected function getDtoClass(): string
     {
-        return 'array<' . SchedulePeriod::class . '>';
+        return SchedulePeriod::class . '[]';
     }
 }

@@ -4,15 +4,25 @@ declare(strict_types=1);
 
 namespace Onepix\RenovatioSdk\Schedule\DTO;
 
-use Onepix\RenovatioSdk\Shared\DTO\OnlyDate;
-use Onepix\RenovatioSdk\Shared\DTO\OnlyDateTime;
+use DateTimeImmutable;
+use Symfony\Component\Serializer\Attribute\Context;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 final readonly class SchedulePeriod
 {
     public function __construct(
-        public OnlyDate     $date,
-        public OnlyDateTime $timeStart,
-        public OnlyDateTime $timeEnd,
+        #[Context([
+            DateTimeNormalizer::FORMAT_KEY => 'd.m.Y',
+        ])]
+        public DateTimeImmutable     $date,
+        #[Context([
+            DateTimeNormalizer::FORMAT_KEY => 'd.m.Y H:i',
+        ])]
+        public DateTimeImmutable $timeStart,
+        #[Context([
+            DateTimeNormalizer::FORMAT_KEY => 'd.m.Y H:i',
+        ])]
+        public DateTimeImmutable $timeEnd,
         public int          $type,
         public int          $clinicId,
         public int          $userId,

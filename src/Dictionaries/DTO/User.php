@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Onepix\RenovatioSdk\Dictionaries\DTO;
 
-use Onepix\RenovatioSdk\Shared\DTO\OnlyDate;
+use DateTimeImmutable;
 use Onepix\RenovatioSdk\Shared\Enums\Gender;
+use Symfony\Component\Serializer\Attribute\Context;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 final readonly class User
 {
@@ -15,7 +17,6 @@ final readonly class User
      * @param bool $isDeleted
      * @param ?string $avatar
      * @param ?string $avatarSmall
-     * @param ?OnlyDate $birthDate
      * @param Gender $gender
      * @param int[] $role
      * @param string $roleTitles
@@ -44,7 +45,6 @@ final readonly class User
      * @param int|null $patientAgeTo
      * @param bool $isOutside
      * @param bool $isTelemedicine
-     * @param ?OnlyDate $dateWorkFrom
      * @param string|null $workPeriod
      * @param string|null $workDegree
      * @param string|null $workRank
@@ -81,7 +81,10 @@ final readonly class User
         public string $educationCourses,
         public ?string   $avatar = null,
         public ?string   $avatarSmall = null,
-        public ?OnlyDate $birthDate = null,
+        #[Context([
+            DateTimeNormalizer::FORMAT_KEY => 'd.m.Y',
+        ])]
+        public ?DateTimeImmutable $birthDate = null,
         public ?string $documentDate = null,
         public ?string $phone = null,
         public ?string $email = null,
@@ -97,7 +100,10 @@ final readonly class User
         public ?int $defaultClinic = null,
         public ?int $patientAgeFrom = null,
         public ?int $patientAgeTo = null,
-        public ?OnlyDate $dateWorkFrom = null,
+        #[Context([
+            DateTimeNormalizer::FORMAT_KEY => 'd.m.Y',
+        ])]
+        public ?DateTimeImmutable $dateWorkFrom = null,
         public ?string $workPeriod = null,
         public ?string $workDegree = null,
         public ?string $workRank = null,

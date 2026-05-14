@@ -32,6 +32,6 @@ final class GetServicePriceTypesRequest extends BaseRenovatioRequest implements 
 
     protected function getDtoClass(): string
     {
-        return 'array<' . ServicePriceType::class . '>';
+        return ServicePriceType::class . '[]';
     }
 }

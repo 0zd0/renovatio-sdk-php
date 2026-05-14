@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\Schedule;
 
-use Onepix\RenovatioSdk\Schedule\DTO\ScheduleSlot;
+use Onepix\RenovatioSdk\Schedule\DTO\DoctorScheduleSlot;
 use Onepix\RenovatioSdk\Schedule\Requests\GetScheduleRequest;
 
 it('the correctness of DTO in production', function () {
@@ -16,5 +16,5 @@ it('the correctness of DTO in production', function () {
     expect($dto)
         ->toBeArray()
         ->not->toBeEmpty()
-        ->toContainOnlyInstancesOf(ScheduleSlot::class);
+        ->toContainOnlyInstancesOf(DoctorScheduleSlot::class);
 });

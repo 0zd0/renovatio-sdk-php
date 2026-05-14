@@ -2,38 +2,63 @@
 
 namespace Onepix\RenovatioSdk\Shared\Support;
 
-use CuyZ\Valinor\Mapper\Configurator\ConvertKeysToCamelCase;
-use CuyZ\Valinor\Mapper\TreeMapper;
-use CuyZ\Valinor\MapperBuilder;
-use CuyZ\Valinor\Normalizer\Format;
-use CuyZ\Valinor\Normalizer\Normalizer;
-use CuyZ\Valinor\NormalizerBuilder;
+use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
+use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
+use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AttributeLoader;
+use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\BackedEnumNormalizer;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 final class APIMapper
 {
-    private static ?TreeMapper $mapper = null;
+    private static ?SerializerInterface $serializer = null;
 
-    private static ?Normalizer $normalizer = null;
-
-    public static function get(): TreeMapper
+    public static function setSerializer(SerializerInterface $serializer): void
     {
-        if (self::$mapper === null) {
-            self::$mapper = new MapperBuilder()
-                ->configureWith(new ConvertKeysToCamelCase())
-                ->allowScalarValueCasting()
-                ->allowSuperfluousKeys()
-                ->mapper();
-        }
-
-        return self::$mapper;
+        self::$serializer = $serializer;
     }
 
-    public static function getNormalizer(): Normalizer
+    public static function getSerializer(): SerializerInterface
     {
-        if (self::$normalizer === null) {
-            self::$normalizer = new NormalizerBuilder()->normalizer(Format::array());
+        if (self::$serializer === null) {
+            self::$serializer = self::buildSerializer();
         }
 
-        return self::$normalizer;
+        return self::$serializer;
+    }
+
+    private static function buildSerializer(): SerializerInterface
+    {
+        $classMetadataFactory = new ClassMetadataFactory(new AttributeLoader());
+        $nameConverter = new CamelCaseToSnakeCaseNameConverter();
+        $reflectionExtractor = new ReflectionExtractor();
+        $phpDocExtractor = new PhpDocExtractor();
+
+        $propertyInfoExtractor = new PropertyInfoExtractor(
+            [$reflectionExtractor],
+            [$phpDocExtractor, $reflectionExtractor],
+            [$phpDocExtractor],
+        );
+
+        $normalizers = [
+            new BackedEnumNormalizer(),
+            new DateTimeNormalizer(),
+            new ArrayDenormalizer(),
+            new ObjectNormalizer(
+                $classMetadataFactory,
+                $nameConverter,
+                null,
+                $propertyInfoExtractor,
+            ),
+        ];
+
+        return new Serializer($normalizers, [new JsonEncoder()]);
     }
 }

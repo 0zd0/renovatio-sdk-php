@@ -69,6 +69,6 @@ final class GetServiceCategoriesRequest extends BaseRenovatioRequest implements 
 
     protected function getDtoClass(): string
     {
-        return 'array<' . ServiceCategory::class . '>';
+        return ServiceCategory::class . '[]';
     }
 }

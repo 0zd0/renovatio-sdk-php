@@ -15,6 +15,7 @@ final class Renovatio extends Connector implements HasBody
     public function __construct(
         private readonly string $apiKey,
         private readonly string $domain = 'app.rnova.org',
+        private readonly string $timezone = 'Europe/Moscow',
         private readonly ?string $proxy = null,
     ) {}
 
@@ -39,5 +40,10 @@ final class Renovatio extends Connector implements HasBody
         }
 
         return $config;
+    }
+
+    public function getTimezone(): string
+    {
+        return $this->timezone;
     }
 }

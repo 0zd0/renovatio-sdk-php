@@ -151,6 +151,6 @@ final class GetServicesRequest extends BaseRenovatioRequest implements HasBody
 
     protected function getDtoClass(): string
     {
-        return 'array<' . Service::class . '>';
+        return Service::class . '[]';
     }
 }

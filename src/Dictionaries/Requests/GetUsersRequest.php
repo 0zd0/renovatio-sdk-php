@@ -151,6 +151,6 @@ final class GetUsersRequest extends BaseRenovatioRequest implements HasBody
 
     protected function getDtoClass(): string
     {
-        return 'array<' . User::class . '>';
+        return User::class . '[]';
     }
 }

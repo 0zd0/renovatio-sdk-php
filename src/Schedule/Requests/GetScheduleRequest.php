@@ -182,7 +182,7 @@ final class GetScheduleRequest extends BaseRenovatioRequest implements HasBody
 
         foreach ($data as $id => $slots) {
             $normalized[] = [
-                'id' => $id,
+                'id' => (int) $id,
                 'slots' => $slots,
             ];
         }
@@ -192,6 +192,6 @@ final class GetScheduleRequest extends BaseRenovatioRequest implements HasBody
 
     protected function getDtoClass(): string
     {
-        return 'array<' . DoctorScheduleSlot::class . '>';
+        return DoctorScheduleSlot::class . '[]';
     }
 }
