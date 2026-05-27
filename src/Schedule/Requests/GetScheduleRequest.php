@@ -176,7 +176,7 @@ final class GetScheduleRequest extends BaseRenovatioRequest implements HasBody
         return $payload;
     }
 
-    protected function normalizeResponseData(array $data): array
+    protected function normalizeResponseData(mixed $data): array
     {
         $normalized = [];
 

@@ -19,7 +19,7 @@ abstract class BaseRenovatioRequest extends Request
 
     abstract protected function getDtoClass(): string;
 
-    protected function normalizeResponseData(array $data): array
+    protected function normalizeResponseData(mixed $data): mixed
     {
         return $data;
     }

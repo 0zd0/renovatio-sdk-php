@@ -6,10 +6,12 @@ namespace Onepix\RenovatioSdk\Schedule\Requests;
 
 use DateTimeInterface;
 use Onepix\RenovatioSdk\Schedule\DTO\AppointmentService;
+use Onepix\RenovatioSdk\Schedule\DTO\CreatedAppointment;
 use Onepix\RenovatioSdk\Shared\Requests\BaseRenovatioRequest;
 use Onepix\RenovatioSdk\Shared\Support\APIMapper;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 
 final class CreateAppointmentRequest extends BaseRenovatioRequest implements HasBody
 {
@@ -338,8 +340,11 @@ final class CreateAppointmentRequest extends BaseRenovatioRequest implements Has
         }
 
         if ($this->services !== null) {
-            $servicesData = APIMapper::getNormalizer()->normalize($this->services);
-            $servicesData = array_map(static fn(array $service) => array_filter($service, static fn($val) => $val !== null), (array) $servicesData);
+            $servicesData = APIMapper::getSerializer()->normalize(
+                $this->services,
+                null,
+                [AbstractObjectNormalizer::SKIP_NULL_VALUES => true],
+            );
 
             $payload['services'] = json_encode($servicesData, JSON_THROW_ON_ERROR);
         }
@@ -359,8 +364,15 @@ final class CreateAppointmentRequest extends BaseRenovatioRequest implements Has
         return $payload;
     }
 
+    protected function normalizeResponseData(mixed $data): array
+    {
+        return [
+            'id' => $data,
+        ];
+    }
+
     protected function getDtoClass(): string
     {
-        return '';
+        return CreatedAppointment::class;
     }
 }
