@@ -17,7 +17,7 @@ final readonly class User
      * @param bool $isDeleted
      * @param ?string $avatar
      * @param ?string $avatarSmall
-     * @param Gender $gender
+     * @param ?Gender $gender
      * @param int[] $role
      * @param string $roleTitles
      * @param string $documentNumber
@@ -61,7 +61,6 @@ final readonly class User
         public int       $id,
         public string    $name,
         public bool      $isDeleted,
-        public Gender    $gender,
         public array     $role,
         public string    $roleTitles,
         public string    $documentNumber,
@@ -79,6 +78,7 @@ final readonly class User
         public string $externalLink,
         public string $education,
         public string $educationCourses,
+        public ?Gender    $gender = null,
         public ?string   $avatar = null,
         public ?string   $avatarSmall = null,
         #[Context([

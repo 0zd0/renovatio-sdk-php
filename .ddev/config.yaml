@@ -47,7 +47,7 @@ corepack_enable: false
 # router_http_port: <port>  # Port to be used for http (defaults to global configuration, usually 80)
 # router_https_port: <port> # Port for https (defaults to global configuration, usually 443)
 
-# xdebug_enabled: false  # Set to true to enable Xdebug and "ddev start" or "ddev restart"
+#xdebug_enabled: true
 # Note that for most people the commands
 # "ddev xdebug" to enable Xdebug and "ddev xdebug off" to disable it work better,
 # as leaving Xdebug enabled all the time is a big performance hit.
